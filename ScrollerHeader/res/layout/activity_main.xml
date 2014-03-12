@@ -1,0 +1,44 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <FrameLayout
+        android:id="@+id/viewPagerHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/imagePlaceholder"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="#DDDDDD"
+            android:src="@drawable/ic_launcher" />
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/imageViewBlur"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:focusable="false"
+        android:scaleType="fitStart" />
+
+    <View
+        android:id="@+id/viewWhiteWash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80FFFFFF"
+        android:clickable="false"
+        android:focusable="false" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:clipToPadding="false"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp" >
+    </ListView>
+
+</FrameLayout>
