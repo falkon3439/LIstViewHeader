@@ -203,7 +203,7 @@ public class MainActivity extends Activity implements OnScrollListener, OnGlobal
 			View topView = listView.getChildAt(0);
 			Rect touchRect = new Rect(listView.getLeft(), topView.getTop(), listView.getRight(), listView.getBottom());
 			if (!touchRect.contains((int) event.getX(), (int) event.getY())) {
-				mViewPagerHolder.onTouchEvent(event);
+				mViewPagerHolder.dispatchTouchEvent(event);
 				return true;
 			}
 		}
