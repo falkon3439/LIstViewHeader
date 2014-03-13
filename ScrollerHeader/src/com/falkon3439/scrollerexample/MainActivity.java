@@ -194,6 +194,8 @@ public class MainActivity extends Activity implements OnScrollListener, OnGlobal
 		mListView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
 	}
 
+	private boolean mTouchedHeader = false;
+
 	// Some additional touch hackery, there may be a better way to do this
 	// But this should work
 	@Override
@@ -202,9 +204,27 @@ public class MainActivity extends Activity implements OnScrollListener, OnGlobal
 		if (listView.getFirstVisiblePosition() == 0) {
 			View topView = listView.getChildAt(0);
 			Rect touchRect = new Rect(listView.getLeft(), topView.getTop(), listView.getRight(), listView.getBottom());
+
+			// See if the touch event was inside the header
 			if (!touchRect.contains((int) event.getX(), (int) event.getY())) {
-				mViewPagerHolder.dispatchTouchEvent(event);
-				return true;
+				// The event started in the header
+				if (event.getAction() == MotionEvent.ACTION_DOWN) {
+					mTouchedHeader = true;
+				}
+
+				// The touch started in the Header, give it the event
+				if (mTouchedHeader) {
+					mViewPagerHolder.dispatchTouchEvent(event);
+					return true;
+				}
+			}
+			// The event started in the header, but now we are outside of it
+			// Pass an action_outside event
+			else if (mTouchedHeader) {
+				MotionEvent outsideEvent = MotionEvent.obtain(event);
+				outsideEvent.setAction(MotionEvent.ACTION_OUTSIDE);
+				outsideEvent.recycle();
+				mTouchedHeader = false;
 			}
 		}
 		return false;
