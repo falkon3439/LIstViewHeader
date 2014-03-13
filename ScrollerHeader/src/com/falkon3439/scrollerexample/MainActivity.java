@@ -223,6 +223,7 @@ public class MainActivity extends Activity implements OnScrollListener, OnGlobal
 			else if (mTouchedHeader) {
 				MotionEvent outsideEvent = MotionEvent.obtain(event);
 				outsideEvent.setAction(MotionEvent.ACTION_OUTSIDE);
+				mViewPagerHolder.dispatchTouchEvent(outsideEvent);
 				outsideEvent.recycle();
 				mTouchedHeader = false;
 			}
